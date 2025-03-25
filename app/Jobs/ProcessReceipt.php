@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Jobs\ProcessOcr;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
@@ -14,15 +15,16 @@ class ProcessReceipt implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $receiptId;
-    private $response;
+    private $userId;
 
     /**
      * Create a new job instance.
      * @param $receiptDetails
      */
-    public function __construct($receiptId)
+    public function __construct($userId, $receiptId)
     {
         $this->receiptId = $receiptId;
+        $this->userId = $userId;
     }
 
     /**
@@ -30,22 +32,33 @@ class ProcessReceipt implements ShouldQueue
      */
     public function handle()
     {
-    //    dd($this->receiptId);
-        //$processor->process($this->receiptDetails);
-        // get image from media
+        // COnnect OCR SErvice and send image
 
-        // send image to ocr service
-        $ocrResult = '{"receipt": {
-                "num": "647747664",
-            "items": [
-                {"name": "MILKA CH&Bis 300gr", "kol":1},
-                {"name": "MILKA CCow 120gr", "kol":1},
-                {"name": "MILKA CCrem 90", "kol":1},
-            ]
-        }}';
+        // received result
+        $ocrResult = '{"receipt": 
+            {"num": "647747664",
+                "items": [
+                    {"name": "MILKA Choco DesOrg 147gr", "kol":"1"},
+                    {"name": "MILKA Choco desert muss 128gr", "kol":"1"},
+                    {"name": "MILKA Choco Minis 150g", "kol":"1"}
+                ]
+            }
+            }';
 
-      //  $receipt = new Receipt();
-        ReceiptController::update_result($this->receiptId, $ocrResult);
+        self::updateResult($ocrResult);
 
+        ProcessOcr::dispatch($this->userId, $this->receiptId, $ocrResult);
+
+    }
+
+    private function updateResult(string $ocrResult){
+            $receipt = new ReceiptController();
+
+        try {
+            $receipt->update_ocr($this->receiptId, $ocrResult);
+
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 }

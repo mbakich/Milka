@@ -113,6 +113,21 @@ class UserController extends BaseController
 //        return $user->pushToken;
     }
 
+    public function update_user_points(int $userId, int $points)
+    {
+        $user = User::find($userId);
+        $user->currentPoints += $points;
+
+        if($user->currentPoints >= 120){
+            $user->currentPoints = 120;
+        }
+
+     //   dd($user->currentPoints);
+         $user->save();
+
+        return $this->sendResponse('', 'Receipt retrieved successfully.');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

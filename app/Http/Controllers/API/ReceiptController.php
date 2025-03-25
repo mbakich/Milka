@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Jobs\ProcessOcr;
 use App\Models\Web\Image;
 use DateTime;
 use Illuminate\Http\Request;
@@ -32,26 +33,42 @@ class ReceiptController extends BaseController
      */
     public function processReceipt(Request $request)
     {
- //       dd($input);
+        $input = $request->all();
+       // dd($input);
         /* Koraci
         1. kreiraj zapis */
-      //  $receipt_id = $this->initStore($request);
+        $receipt_id = $this->initStore($request);
       //  dd($receipt_id);
-        $receipt_id = 11;
+      //      var_dump($receipt_id);
+      //  $receipt_id = 11;
         /*
         2. Pozovi job*/
-        ProcessReceipt::dispatch($receipt_id);
-       // dd($ocrResult);
-//        dd(response()->json($result));
-//        $receipt = new Receipt();
-//        $receipt->update_result($receipt_id, $ocrResult);
-        /*
-        3. Ako je job zavrsio udateuj stvari (ili se to radi iz job-a)?
+        ProcessReceipt::dispatch($input['userId'], $receipt_id);
 
-        */
+        // refresh receipt with new data
+//        $receipt1 = new Receipt();
+//        $receipt =$receipt1->find($receipt_id);
 
+//        $receipt = self::getUpdatedReceipt($receipt_id);
+//        dd($receipt);
+//
+//        ProcessOcr::dispatch($receipt_id, $receipt->rawOcrData);
+
+        // refresh receipt with new data
+     //        $receipt = Receipt::find($receipt_id);
+//        $receipt1 = new Receipt();
+//        $receipt =$receipt1->find($receipt_id);
+//
+//        $uc = new UserController();
+//        $uc->update_user_points($receipt->userId, $receipt->pointsAwarded);
 
         return $this->sendResponse(true, 'Receipts retrieved successfully.');
+    }
+
+    private function getUpdatedReceipt($receipt_id){
+        $receipt = Receipt::find($receipt_id);
+
+        return $receipt;
     }
 
     /**
@@ -76,11 +93,11 @@ class ReceiptController extends BaseController
 //dd($input);
         $input['userId'] = (int)$input['userId'];
         $input = array_merge($input, ['rawOcrData' => '']);
-        $input = array_merge($input, ['submissionDate' => new DateTime()]);
-        $input = array_merge($input, ['processingDate' => new DateTime()]);
+     //   $input = array_merge($input, ['submissionDate' => new DateTime()]);
+     //   $input = array_merge($input, ['processingDate' => new DateTime()]);
         $input = array_merge($input, ['pointsAwarded' => (int)'0']);
 //dd($input);
-
+//var_dump($input);
         $receipt = Receipt::create($input);
 
         $receipt
@@ -119,7 +136,7 @@ class ReceiptController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id): JsonResponse
+    public function show($id)
     {
         $receipt = Receipt::find($id);
 
@@ -130,13 +147,24 @@ class ReceiptController extends BaseController
         return $this->sendResponse(new ReceiptResource($receipt), 'Receipt retrieved successfully.');
     }
 
-    public function update_result(int $receiptId, string $ocrJson)
+    public function update_ocr(int $receiptId, string $ocrJson)
     {
         $receipt = Receipt::find($receiptId);
+
         $receipt->rawOcrData = $ocrJson;
         $receipt->save();
 
-        return $this->sendResponse(new ReceiptResource($receipt), 'Receipt updated successfully.');
+        return $this->sendResponse('', 'Receipt retrieved successfully.');
+    }
+
+    public function update_points(int $receiptId, int $points)
+    {
+        $receipt = Receipt::find($receiptId);
+
+        $receipt->pointsAwarded = $points;
+        $receipt->save();
+
+        return $this->sendResponse('', 'Receipt retrieved successfully.');
     }
 
     /**
