@@ -8,7 +8,6 @@
     "require": {
         "php": "^8.2",
         "akaunting/laravel-setting": "^1.2",
-        "grocery-crud/enterprise": "^3.1",
         "jeroennoten/laravel-adminlte": "^3.15",
         "knuckleswtf/scribe": "^5.1",
         "laravel/framework": "^12.0",
@@ -53,8 +52,7 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan vendor:publish --provider=\"GroceryCrud\\LaravelAssetsServiceProvider\""
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

@@ -324,64 +324,8 @@ return [
             'url' => 'prizes',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        [
-            'text' => 'image',
-            'url' => 'image',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
         ['header' => 'administration'],
 
-        [
-            'text' => 'GCRUD',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'users_GC',
-                    'url' => '/admin/users-management',
-                    'icon' => 'fas fa-fw fa-user',
-                ],
-                [
-                    'text' => 'settings_GC',
-                    'url' => '/admin/settings-management',
-                    'icon' => 'fas fa-fw fa-cog',
-                ],
-                [
-                    'text' => 'categories_GC',
-                    'url' => '/admin/categories-management',
-                    'icon' => 'fas fa-fw fa-gift',
-                ],
-                [
-                    'text' => 'receipts_GC',
-                    'url' => '/admin/receipts-management',
-                    'icon' => 'fas fa-fw fa-file',
-                ],
-                [
-                    'text' => 'products_GC',
-                    'url' => '/admin/products-management',
-                    'icon' => 'fas fa-fw fa-gift',
-                ],
-                [
-                    'text' => 'prizes_GC',
-                    'url' => '/admin/prizes-management',
-                    'icon' => 'fas fa-fw fa-gift',
-                ],
-                [
-                    'text' => 'countries_GC',
-                    'url' => '/admin/countries-management',
-                    'icon' => 'fas fa-fw fa-gift',
-                ],
-                [
-                    'text' => 'orders_GC',
-                    'url' => '/admin/orders-management',
-                    'icon' => 'fas fa-fw fa-gift',
-                ],
-                [
-                    'text' => 'receipts_GC',
-                    'url' => '/admin/receipts-management',
-                    'icon' => 'fas fa-fw fa-gift',
-                ],
-            ],
-        ],
         [
             'text' => 'misc',
             'icon' => 'fas fa-fw fa-share',
