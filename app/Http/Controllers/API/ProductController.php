@@ -114,4 +114,15 @@ class ProductController extends BaseController
 
         return $this->sendResponse([], 'Product deleted successfully.');
     }
+
+    public function filterProductsPerCategory(Request $request){
+        $input = $request->all();
+
+        $products = Product::join('categories','products.category','=','categories.naziv')
+            ->where('categories.id','=', $input['category_id'])
+            ->select('*')
+            ->get();
+
+        return $this->sendResponse($products, 'Products by category id.');
+    }
 }

@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->group( function () {
     });
 
     Route::resource('products', ProductController::class);
-    Route::resource('filterProductsPerCategory', ProductController::class);
+    Route::post('filterProductsPerCategory', [ProductController::class,'filterProductsPerCategory']);
 
     Route::post('processReceipt', [ReceiptController::class,'processReceipt']);
 
