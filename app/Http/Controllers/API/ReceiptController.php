@@ -34,33 +34,10 @@ class ReceiptController extends BaseController
     public function processReceipt(Request $request)
     {
         $input = $request->all();
-       // dd($input);
-        /* Koraci
-        1. kreiraj zapis */
+
         $receipt_id = $this->initStore($request);
-      //  dd($receipt_id);
-      //      var_dump($receipt_id);
-      //  $receipt_id = 11;
-        /*
-        2. Pozovi job*/
+
         ProcessReceipt::dispatch($input['userId'], $receipt_id);
-
-        // refresh receipt with new data
-//        $receipt1 = new Receipt();
-//        $receipt =$receipt1->find($receipt_id);
-
-//        $receipt = self::getUpdatedReceipt($receipt_id);
-//        dd($receipt);
-//
-//        ProcessOcr::dispatch($receipt_id, $receipt->rawOcrData);
-
-        // refresh receipt with new data
-     //        $receipt = Receipt::find($receipt_id);
-//        $receipt1 = new Receipt();
-//        $receipt =$receipt1->find($receipt_id);
-//
-//        $uc = new UserController();
-//        $uc->update_user_points($receipt->userId, $receipt->pointsAwarded);
 
         return $this->sendResponse(true, 'Receipts retrieved successfully.');
     }
@@ -93,8 +70,8 @@ class ReceiptController extends BaseController
 //dd($input);
         $input['userId'] = (int)$input['userId'];
         $input = array_merge($input, ['rawOcrData' => '']);
-     //   $input = array_merge($input, ['submissionDate' => new DateTime()]);
-     //   $input = array_merge($input, ['processingDate' => new DateTime()]);
+        $input = array_merge($input, ['submissionDate' => new DateTime()]);
+        $input = array_merge($input, ['processingDate' => new DateTime()]);
         $input = array_merge($input, ['pointsAwarded' => (int)'0']);
 //dd($input);
 //var_dump($input);
@@ -162,6 +139,7 @@ class ReceiptController extends BaseController
         $receipt = Receipt::find($receiptId);
 
         $receipt->pointsAwarded = $points;
+        $receipt->status = 'processed';
         $receipt->save();
 
         return $this->sendResponse('', 'Receipt retrieved successfully.');

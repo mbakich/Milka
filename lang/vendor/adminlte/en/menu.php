@@ -25,5 +25,10 @@ return [
     'misc' => 'Misc',
     'countries' => 'Countries',
     'management' => 'MANAGEMENT',
-    'login' => 'Login'
+    'login' => 'Login',
+    'dashboard' => 'Dashboard',
+    'tables' => 'TABLES',
+    'products' => 'Products',
+    'prizes' => 'Prizes',
+    'receipts' => 'Receipts',
 ];

@@ -1,6 +1,9 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+// use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Web\Admin\SettingsController;
+use App\Http\Controllers\Web\CountryController;
+use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\ProductController;
 use App\Http\Controllers\Web\Media\ImageController;
 use App\Http\Controllers\Web\PrizeController;
@@ -15,9 +18,9 @@ Route::get('/', function () {
     return view('welcome_adminlte');
 })->middleware(['auth', 'verified']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,7 +38,8 @@ require __DIR__.'/auth.php';
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('settings', [SettingsController::class, 'index'])->name('settings');
 
 Route::resource('products', ProductController::class)->middleware(['auth', 'verified']);
 //Route::get('products', [ProductController::class, 'index'])->name('products.index')->middleware(['auth', 'verified']);
@@ -45,12 +49,9 @@ Route::resource('products', ProductController::class)->middleware(['auth', 'veri
 
 Route::resource('prizes', PrizeController::class)->middleware(['auth', 'verified']);
 Route::resource('receipts', ReceiptController::class)->middleware(['auth', 'verified']);
+Route::resource('countries', CountryController::class);
 
 Route::resource('image', ImageController::class);
-
-// DataTables
-
-Route::get('/users_dt', [UsersDataTableController::class, 'index'])->name('users.index_dt');
 
 // Media
 
@@ -78,35 +79,35 @@ Route::post('add-media-from-request', [ImageController::class, 'store']);
 
 
 // Helper
-Route::get('call-helper', function(){
-
-    $str1 = "MILKA Chocko & Buiscuit 300G ";
-    $str2 = "MILKA CH&Bis 300gr";
-
-    $compare = compareTwoStrings($str1,$str2);
-    print_a('Compare:' .$str1.' - '.$str2 .' -> result:'. $compare);
-
-    $str1 = "Milka Choco Cow 120G  ";
-    $str2 = "MILKA CCow 120gr";
-
-    $compare = compareTwoStrings($str1,$str2);
-    print_a('Compare:' .$str1.' - '.$str2 .' -> result:'. $compare);
-
-    $str1 = "Milka Sensation Dark 156G";
-    $str2 = "MILKA sens 300gr";
-
-    $compare = compareTwoStrings($str1,$str2);
-    print_a('Compare:' .$str1.' - '.$str2 .' -> result:'. $compare);
-
-    $str1 = "Milka Oreo 300G ";
-    $str2 = "MLKA Or 300gr";
-
-    $compare = compareTwoStrings($str1,$str2);
-    print_a('Compare:' .$str1.' - '.$str2 .' -> result:'. $compare);
-
-    $str1 = "Milka Almond Crispy Creme 90G";
-    $str2 = "MILKA CCrem 90";
-
-    $compare = compareTwoStrings($str1,$str2);
-    print_a('Compare:' .$str1.' - '.$str2 .' -> result:'. $compare);
-});
+//Route::get('call-helper', function(){
+//
+//    $str1 = "MILKA Chocko & Buiscuit 300G ";
+//    $str2 = "MILKA CH&Bis 300gr";
+//
+//    $compare = compareTwoStrings($str1,$str2);
+//    print_a('Compare:' .$str1.' - '.$str2 .' -> result:'. $compare);
+//
+//    $str1 = "Milka Choco Cow 120G  ";
+//    $str2 = "MILKA CCow 120gr";
+//
+//    $compare = compareTwoStrings($str1,$str2);
+//    print_a('Compare:' .$str1.' - '.$str2 .' -> result:'. $compare);
+//
+//    $str1 = "Milka Sensation Dark 156G";
+//    $str2 = "MILKA sens 300gr";
+//
+//    $compare = compareTwoStrings($str1,$str2);
+//    print_a('Compare:' .$str1.' - '.$str2 .' -> result:'. $compare);
+//
+//    $str1 = "Milka Oreo 300G ";
+//    $str2 = "MLKA Or 300gr";
+//
+//    $compare = compareTwoStrings($str1,$str2);
+//    print_a('Compare:' .$str1.' - '.$str2 .' -> result:'. $compare);
+//
+//    $str1 = "Milka Almond Crispy Creme 90G";
+//    $str2 = "MILKA CCrem 90";
+//
+//    $compare = compareTwoStrings($str1,$str2);
+//    print_a('Compare:' .$str1.' - '.$str2 .' -> result:'. $compare);
+//});

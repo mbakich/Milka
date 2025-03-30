@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\UserPrizes;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\User;
@@ -93,33 +94,35 @@ class UserController extends BaseController
         return $this->sendResponse(new UserResource($user), 'User updated successfully.');
     }
 
-    public function updateToken(int $id, string $inData)
-    {
-        $user = User::find($id);
-        $user->pushToken = $inData;
-        $user->save();
-
-        return $this->sendResponse(new UserResource($user), 'Push token updated successfully.');
-    }
-
-    public function getToken(User $user)
-    {
+//    public function updateToken(int $id, string $inData)
+//    {
 //        $user = User::find($id);
 //        $user->pushToken = $inData;
 //        $user->save();
 //
-        return $this->sendResponse($user->pushToken, 'Push token.');
+//        return $this->sendResponse(new UserResource($user), 'Push token updated successfully.');
+//    }
 
-//        return $user->pushToken;
-    }
+//    public function getToken(User $user)
+//    {
+////        $user = User::find($id);
+////        $user->pushToken = $inData;
+////        $user->save();
+////
+//        return $this->sendResponse($user->pushToken, 'Push token.');
+//
+////        return $user->pushToken;
+//    }
 
     public function update_user_points(int $userId, int $points)
     {
         $user = User::find($userId);
-        $user->currentPoints += $points;
+        $sumPoints = $user->currentPoints + $user->redeemedPoints;
 
-        if($user->currentPoints >= 120){
-            $user->currentPoints = 120;
+        if(($sumPoints + $points) >= 120){
+            $user->currentPoints = $sumPoints + $points - 120;
+        }else{
+            $user->currentPoints += $points;
         }
 
      //   dd($user->currentPoints);

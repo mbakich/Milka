@@ -303,51 +303,55 @@ return [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
-        ['header' => 'administration'],
         [
-            'text' => 'users',
-            'url' => 'users',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'products',
-            'url' => 'products',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'receipts',
-            'url' => 'receipts',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'prizes',
-            'url' => 'prizes',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'dashboard',
+            'url' => 'dashboard',
+            'icon' => 'fas fa-fw fa-signal',
         ],
         ['header' => 'administration'],
 
         [
-            'text' => 'misc',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'settings',
+            'icon' => 'fas fa-fw fa-cog',
             'submenu' => [
                 [
-                    'text' => 'countries',
-                    'url' => 'admin/settings',
-                    'icon' => 'fas fa-fw fa-gift',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'settings',
+                    'url' => 'settings',
+                    'icon' => 'fas fa-fw fa-cog',
                 ],
             ],
         ],
-        ['header' => 'management'],
         [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        ['header' => 'info'],
+            'text' => 'tables',
+            'icon' => 'fas fa-fw fa-table',
+            'submenu' => [
+                [
+                    'text' => 'users',
+                    'url' => 'users',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'products',
+                    'url' => 'products',
+                    'icon' => 'fas fa-fw fa-square',
+                ],
+                [
+                    'text' => 'receipts',
+                    'url' => 'receipts',
+                    'icon' => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text' => 'prizes',
+                    'url' => 'prizes',
+                    'icon' => 'fas fa-fw fa-gift',
+                ],
+                [
+                    'text' => 'countries',
+                    'url' => 'countries',
+                    'icon' => 'fas fa-fw fa-map',
+                ],
+            ],
+        ]
     ],
 
     /*
@@ -386,7 +390,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -406,7 +410,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -421,7 +425,7 @@ return [
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

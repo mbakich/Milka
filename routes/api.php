@@ -1,11 +1,14 @@
 <?php
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\Notifications\FcmController;
 use App\Http\Controllers\API\ReceiptController;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\PrizeController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\Media\ImageController;
 
@@ -25,11 +28,28 @@ Route::middleware('auth:sanctum')->group( function () {
     });
 
     Route::resource('products', ProductController::class);
-    Route::resource('filterProductsByCategory', ProductController::class);
+    Route::resource('filterProductsPerCategory', ProductController::class);
 
     Route::post('processReceipt', [ReceiptController::class,'processReceipt']);
 
+    Route::resource('prizes', PrizeController::class);
+    Route::post('prizes/perCountry', [PrizeController::class, 'perCountry']);
+    Route::post('prizes/getQualified', [PrizeController::class, 'getQualified']);
+    Route::post('prizes/redeemPrize', [PrizeController::class, 'redeemPrize']);
+    Route::post('prizes/getMyPrizes', [PrizeController::class, 'getMyPrizes']);
+
+
+//    Route::get('prizes/perCountry', function (Request $request) {
+//        return (new PrizeController())->perCountry($request);
+//    });
+
 });
+
+// Notifikacije
+
+Route::put('update-device-token', [FcmController::class, 'updateDeviceToken']);
+Route::post('send-fcm-notification', [FcmController::class, 'sendFcmNotification']);
+
 
 Route::post('token', function(Request $request){
 

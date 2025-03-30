@@ -19,24 +19,41 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>User:</strong> <br/>
-                        {{ $prize->user_id }}
+                        <strong>Name:</strong> <br/>
+                        {{ $prize->name }}
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
                     <div class="form-group">
-                        <strong>What:</strong> <br/>
-                        {{ $prize->what }}
+                        <strong>Description:</strong> <br/>
+                        {{ $prize->description }}
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
                     <div class="form-group">
-                        <strong>Points:</strong> <br/>
-                        {{ $prize->points }}
+                        <strong>Points Cost:</strong> <br/>
+                        {{ $prize->pointsCost }}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
+                    <div class="form-group">
+                        <strong>Total Stock:</strong> <br/>
+                        {{ $prize->totalStock }}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
+                    <div class="form-group">
+                        <strong>Remaining Stock:</strong> <br/>
+                        {{ $prize->remainingStock }}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
+                    <div class="form-group">
+                        <strong>Max Per User:</strong> <br/>
+                        {{ $prize->maxPerUser }}
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @stop

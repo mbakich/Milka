@@ -18,42 +18,82 @@
 
             <form action="{{ route('prizes.store') }}" method="POST">
                 @csrf
+                @method('PUT')
 
                 <div class="mb-3">
-                    <label for="inputName" class="form-label"><strong>User:</strong></label>
+                    <label for="inputName" class="form-label"><strong>Name:</strong></label>
                     <input
                         type="text"
                         name="user_id"
-                        class="form-control @error('user_id') is-invalid @enderror"
-                        id="inputUserId"
-                        placeholder="User Id">
-                    @error('user_id')
+                        class="form-control @error('name') is-invalid @enderror"
+                        id="inputName"
+                        placeholder="Name">
+                    @error('name')
                     <div class="form-text text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="inputDetail" class="form-label"><strong>What:</strong></label>
+                    <label for="inputDetail" class="form-label"><strong>Description:</strong></label>
                     <input
                         type="text"
-                        name="what"
-                        class="form-control @error('what') is-invalid @enderror"
-                        id="inputWhat"
-                        placeholder="What">
-                    @error('what')
+                        name="description"
+                        class="form-control @error('description') is-invalid @enderror"
+                        id="inputDescription"
+                        placeholder="Description">
+                    @error('description')
                     <div class="form-text text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="inputDetail" class="form-label"><strong>Points:</strong></label>
+                    <label for="inputDetail" class="form-label"><strong>Points Cost:</strong></label>
                     <input
                         type="text"
-                        name="points"
-                        class="form-control @error('points') is-invalid @enderror"
-                        id="inputPoints"
-                        placeholder="Points">
-                    @error('points')
+                        name="pointsCost"
+                        class="form-control @error('pointsCost') is-invalid @enderror"
+                        id="inputPointsCost"
+                        placeholder="Points Cost">
+                    @error('pointsCost')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputName" class="form-label"><strong>Total Stock:</strong></label>
+                    <input
+                        type="text"
+                        name="totalStock"
+                        class="form-control @error('totalStock') is-invalid @enderror"
+                        id="inputTotal Stock"
+                        placeholder="Total Stock">
+                    @error('totalStock')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDetail" class="form-label"><strong>Remaining Stock:</strong></label>
+                    <input
+                        type="text"
+                        name="remainingStock"
+                        class="form-control @error('remainingStock') is-invalid @enderror"
+                        id="inputRemainingStock"
+                        placeholder="Remaining Stock">
+                    @error('remainingStock')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDetail" class="form-label"><strong>Max Per User:</strong></label>
+                    <input
+                        type="text"
+                        name="maxPerUser"
+                        class="form-control @error('maxPerUser') is-invalid @enderror"
+                        id="inputMaxPerUser"
+                        placeholder="Max Per User">
+                    @error('maxPerUser')
                     <div class="form-text text-danger">{{ $message }}</div>
                     @enderror
                 </div>

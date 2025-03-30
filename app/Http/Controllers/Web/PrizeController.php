@@ -23,6 +23,9 @@ class PrizeController extends Controller
 
         return view('prizes.index', compact('prizes'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
+//        $prizes = Prize::all();
+//
+//        return view('prizes.index', compact('prizes'));
     }
 
     /**

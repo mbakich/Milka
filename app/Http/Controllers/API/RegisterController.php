@@ -46,8 +46,8 @@ class RegisterController extends BaseController
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->plainTextToken;
 
-        $apiUserController = new UserController();
-        $apiUserController->updateToken($user->id, $success['token']);
+    //    $apiUserController = new UserController();
+    //    $apiUserController->updateToken($user->id, $success['token']);
     //    $success['name'] =  $user->name;
         $success['fullName'] =  $user->fullName;
         $success['country'] =  $user->country;

@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Jobs\ProcessOcr;
+use App\Jobs\ProcessOcrJob;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Http\Controllers\API\ReceiptController;
 
-class ProcessReceipt implements ShouldQueue
+class ProcessReceiptJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -47,7 +47,7 @@ class ProcessReceipt implements ShouldQueue
 
         self::updateResult($ocrResult);
 
-        ProcessOcr::dispatch($this->userId, $this->receiptId, $ocrResult);
+        ProcessOcrJob::dispatch($this->userId, $this->receiptId, $ocrResult);
 
     }
 

@@ -18,10 +18,12 @@ class ReceiptController extends Controller
      */
     public function index(): View
     {
-        $receipts = Receipt::latest()->paginate(5);
+     //   $receipts = Receipt::latest()->paginate(5);
 
-        return view('receipts.index', compact('receipts'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $receipts = Receipt::all();
+
+        return view('receipts.index', compact('receipts'));
+        //    ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**

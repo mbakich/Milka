@@ -63,8 +63,6 @@ if (! function_exists ( 'fromISODate' )) {
     }
 }
 
-
-
 if (! function_exists ( 'fromISODateTime' )) {
     function fromISODateTime($inDate) {
         $date=date_create($inDate);

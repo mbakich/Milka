@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Web;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Products\ProductsStoreRequest;
-use App\Http\Requests\Products\ProductsUpdateRequest;
+use App\Http\Requests\Products\ProductStoreRequest;
+use App\Http\Requests\Products\ProductUpdateRequest;
 use App\Models\Web\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,14 +19,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::join('categories','products.category','=','categories.id')
-            ->join('countries', 'products.country','=','countries.id')
-            ->orderBy('products.skuCode')
-        //    ->where('country','1')
-            ->select('products.id','products.skuCode', 'products.skuName', 'categories.naziv as category', 'products.pointsValue','countries.name as country')->paginate(10);
+//        $products = Product::join('categories','products.category','=','categories.id')
+//            ->join('countries', 'products.country','=','countries.id')
+//            ->orderBy('products.skuCode')
+//        //    ->where('country','1')
+//            ->select('products.id','products.skuCode', 'products.skuName', 'categories.naziv as category', 'products.pointsValue','countries.name as country')->paginate(10);
 
-        return view('products.index', compact('products'))
-            ->with('i', (request()->input('page', 1) - 1) * 10);
+        $products = Product::all();
+
+        return view('products.index', compact('products'));
+        //    ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -40,7 +42,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductsStoreRequest $request): RedirectResponse
+    public function store(ProductStoreRequest $request): RedirectResponse
     {
         Product::create($request->validated());
 
@@ -67,7 +69,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductsUpdateRequest $request, Product $product): RedirectResponse
+    public function update(ProductUpdateRequest $request, Product $product): RedirectResponse
     {
         $product->update($request->validated());
 

@@ -21,8 +21,8 @@ class ProductResource extends JsonResource
             'category' => $this->category,
             'pointsValue' => $this->pointsValue,
             'country' => $this->country,
-            'created_at' => $this->created_at->format('d/m/Y'),
-            'updated_at' => $this->updated_at->format('d/m/Y'),
+            'created_at' => $this->created_at->format('Y-m-d'),
+            'updated_at' => $this->updated_at->format('Y-m-d'),
         ];
     }
 }
