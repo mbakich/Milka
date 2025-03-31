@@ -9,6 +9,7 @@ use App\Models\Web\Receipt;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
@@ -53,14 +54,19 @@ class ProcessOcrJob implements ShouldQueue
             }
         }
 
-        $receiptC = new ReceiptController();
-        $receipt = new Receipt();
-
         try {
             // email customer
-            $receiptC->update_points($this->receiptId, $sumPoints);
-            $uc = new UserController();
-            $uc->update_user_points($this->userId, $sumPoints);
+            $request = new Request([
+                'receiptId'   => $this->receiptId,
+                'sumPoints' => $sumPoints,
+            ]);
+            (new ReceiptController())->update_points($request);
+//print_a('pre user');
+            $request = new Request([
+                'userId'   => $this->userId,
+                'sumPoints' => $sumPoints,
+            ]);
+            (new UserController())->update_user_points($request);
 
         } catch (Exception $e) {
             throw new Exception($e->getMessage());

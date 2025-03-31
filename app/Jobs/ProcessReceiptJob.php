@@ -9,6 +9,7 @@ use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Http\Controllers\API\ReceiptController;
+use Illuminate\Http\Request;
 
 class ProcessReceiptJob implements ShouldQueue
 {
@@ -52,10 +53,12 @@ class ProcessReceiptJob implements ShouldQueue
     }
 
     private function updateResult(string $ocrResult){
-            $receipt = new ReceiptController();
-
+        $request = new Request([
+            'receiptId'   => $this->receiptId,
+            'ocrResult' => $ocrResult,
+        ]);
         try {
-            $receipt->update_ocr($this->receiptId, $ocrResult);
+            (new ReceiptController())->update_ocr($request);
 
         } catch (Exception $e) {
             throw new Exception($e->getMessage());

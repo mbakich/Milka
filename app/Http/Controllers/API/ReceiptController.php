@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Jobs\ProcessOcrJob;
-use App\Models\Web\Image;
 use DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
@@ -124,25 +123,40 @@ class ReceiptController extends BaseController
         return $this->sendResponse(new ReceiptResource($receipt), 'Receipt retrieved successfully.');
     }
 
-    public function update_ocr(int $receiptId, string $ocrJson)
+    public function update_ocr(Request $request) //int $receiptId, string $ocrJson)
     {
-        $receipt = Receipt::find($receiptId);
+        $input = $request->all();
+//dd($input['receiptId']);
+        $receipt = Receipt::find($input['receiptId']);
 
-        $receipt->rawOcrData = $ocrJson;
-        $receipt->save();
-
-        return $this->sendResponse('', 'Receipt retrieved successfully.');
+        $receipt->rawOcrData = $input['ocrResult'];
+        try {
+            $receipt->save();
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+//dd($input['ocrResult']);
+      //  return $this->sendResponse(new ReceiptResource($receipt), 'Receipt retrieved successfully.');
+        return true;
     }
 
-    public function update_points(int $receiptId, int $points)
+    public function update_points(Request $request) //int $receiptId, int $points)
     {
-        $receipt = Receipt::find($receiptId);
+        $input = $request->all();
 
-        $receipt->pointsAwarded = $points;
+        $receipt = Receipt::find($input['receiptId']);
+
+        $receipt->pointsAwarded = $input['sumPoints'];
         $receipt->status = 'processed';
-        $receipt->save();
 
-        return $this->sendResponse('', 'Receipt retrieved successfully.');
+        try {
+            $receipt->save();
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+
+    //    return $this->sendResponse('', 'Receipt retrieved successfully.');
+        return true;
     }
 
     /**

@@ -114,19 +114,26 @@ class UserController extends BaseController
 ////        return $user->pushToken;
 //    }
 
-    public function update_user_points(int $userId, int $points)
+    public function update_user_points(Request $request) //int $userId, int $points)
     {
-        $user = User::find($userId);
+        $input = $request->all();
+
+        $user = User::find($input['userId']);
         $sumPoints = $user->currentPoints + $user->redeemedPoints;
 
-        if(($sumPoints + $points) >= 120){
-            $user->currentPoints = $sumPoints + $points - 120;
+        if(($sumPoints + $input['sumPoints']) >= 120){
+            $user->currentPoints = $sumPoints + $input['sumPoints'] - 120;
         }else{
-            $user->currentPoints += $points;
+            $user->currentPoints += $input['sumPoints'];
         }
 
-     //   dd($user->currentPoints);
-         $user->save();
+//dd($user->currentPoints);
+
+        try {
+            $user->save();
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
 
         return $this->sendResponse('', 'Receipt retrieved successfully.');
     }
