@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Jobs\ProcessOcr;
+use App\Jobs\ProcessOcrJob;
 use App\Models\Web\Image;
 use DateTime;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use App\Models\Web\Receipt;
 use Validator;
 use App\Http\Resources\ReceiptResource;
 use Illuminate\Http\JsonResponse;
-use App\Jobs\ProcessReceipt;
+use App\Jobs\ProcessReceiptJob;
 
 class ReceiptController extends BaseController
 {
@@ -37,7 +37,7 @@ class ReceiptController extends BaseController
 
         $receipt_id = $this->initStore($request);
 
-        ProcessReceipt::dispatch($input['userId'], $receipt_id);
+        ProcessReceiptJob::dispatch($input['userId'], $receipt_id);
 
         return $this->sendResponse(true, 'Receipts retrieved successfully.');
     }

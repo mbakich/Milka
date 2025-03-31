@@ -19,9 +19,9 @@ class RedeemPrizeJob implements ShouldQueue
      * Create a new job instance.
      * @param $receiptDetails
      */
-    public function __construct($userId, $orizeId)
+    public function __construct($userId, $prizeId)
     {
-        $this->prizeId = $orizeId;
+        $this->prizeId = $prizeId;
         $this->userId = $userId;
     }
 
@@ -30,6 +30,6 @@ class RedeemPrizeJob implements ShouldQueue
      */
     public function handle(): void
     {
-        //
+        // obradi prvo user_prizes
     }
 }
