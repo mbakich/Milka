@@ -14,7 +14,6 @@ class FcmController extends BaseController
 {
     public function updateDeviceToken(Request $request)
     {
-
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'fcm_token' => 'required|string',

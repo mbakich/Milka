@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Web\Users;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\Web\CreateUserRequest;
-use App\Http\Requests\Web\UpdateUserRequest;
+use App\Http\Requests\User\UserCreateRequest;
+use App\Http\Requests\User\UserUpdateRequest;
 
 class UserController extends Controller
 {
@@ -32,7 +32,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateUserRequest $request)
+    public function store(UserCreateRequest $request)
     {
         User::create($request->validated());
 
@@ -59,9 +59,14 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        $user->update($request->validated());
+     //   $user->update($request->validated());
+
+        $user->update( $request->only(['city', 'address','phoneNumber','idNumber',
+            'country',
+            'currentPoints',
+            'redeemedPoints']) );
 
         return redirect()->route('users.index')
             ->with('success','Product updated successfully');

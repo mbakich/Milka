@@ -122,7 +122,7 @@ class UserController extends BaseController
         $sumPoints = $user->currentPoints + $user->redeemedPoints;
 
         if(($sumPoints + $input['sumPoints']) >= 120){
-            $user->currentPoints = $sumPoints + $input['sumPoints'] - 120;
+            $user->currentPoints = 120; //$sumPoints + $input['sumPoints'] - 120;
         }else{
             $user->currentPoints += $input['sumPoints'];
         }

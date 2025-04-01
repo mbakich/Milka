@@ -20,6 +20,7 @@
             'City',
             'Address',
             'Phone',
+            'Pasoš/ID',
             'Country',
             'Current Points',
             'Redeemed Points',
@@ -66,6 +67,7 @@
                             <td>{{ $user->city }}</td>
                             <td>{{ $user->address }}</td>
                             <td>{{ $user->phoneNumber }}</td>
+                            <td>{{ $user->idNumber }}</td>
                             <td>{{ $user->country }}</td>
                             <td>{{ $user->currentPoints }}</td>
                             <td>{{ $user->redeemedPoints }}</td>

@@ -36,13 +36,112 @@
 
                 <div class="mb-3">
                     <label for="inputDetail" class="form-label"><strong>Email:</strong></label>
-                    <textarea
-                        class="form-control @error('detail') is-invalid @enderror"
-                        style="height:150px"
-                        name="detail"
-                        id="inputDetail"
-                        placeholder="Detail">{{ $user->email }}</textarea>
-                    @error('detail')
+                    <input
+                        type="text"
+                        name="email"
+                        value="{{ $user->email }}"
+                        class="form-control @error('email') is-invalid @enderror"
+                        id="inputEmail"
+                        placeholder="Email">
+                    @error('email')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDetail" class="form-label"><strong>City:</strong></label>
+                    <input
+                        type="text"
+                        name="city"
+                        value="{{ $user->city }}"
+                        class="form-control @error('city') is-invalid @enderror"
+                        id="inputCity"
+                        placeholder="City">
+                    @error('city')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDetail" class="form-label"><strong>Address:</strong></label>
+                    <input
+                        type="text"
+                        name="address"
+                        value="{{ $user->address }}"
+                        class="form-control @error('address') is-invalid @enderror"
+                        id="inputAddress"
+                        placeholder="Address">
+                    @error('address')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDetail" class="form-label"><strong>Pasoš/ID:</strong></label>
+                    <input
+                        type="text"
+                        name="idNumber"
+                        value="{{ $user->idNumber }}"
+                        class="form-control @error('idNumber') is-invalid @enderror"
+                        id="inputIdNumber"
+                        placeholder="ID Number">
+                    @error('idNumber')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDetail" class="form-label"><strong>Phone:</strong></label>
+                    <input
+                        type="text"
+                        name="phoneNumber"
+                        value="{{ $user->phoneNumber }}"
+                        class="form-control @error('phoneNumber') is-invalid @enderror"
+                        id="inputPhoneNumber"
+                        placeholder="PhoneNumber">
+                    @error('phoneNumber')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDetail" class="form-label"><strong>Country:</strong></label>
+                    <input
+                        type="text"
+                        name="country"
+                        value="{{ $user->country }}"
+                        class="form-control @error('country') is-invalid @enderror"
+                        id="inputCountry"
+                        placeholder="Country">
+                    @error('country')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDetail" class="form-label"><strong>Current Points:</strong></label>
+                    <input
+                        type="text"
+                        name="currentPoints"
+                        value="{{ $user->currentPoints }}"
+                        class="form-control @error('currentPoints') is-invalid @enderror"
+                        id="inputCurrentPoints"
+                        placeholder="Current Points">
+                    @error('currentPoints')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDetail" class="form-label"><strong>Redeemed Points:</strong></label>
+                    <input
+                        type="text"
+                        name="redeemedPoints"
+                        value="{{ $user->redeemedPoints }}"
+                        class="form-control @error('redeemedPoints') is-invalid @enderror"
+                        id="inputRedeemedPoints"
+                        placeholder="Redeemed Points">
+                    @error('redeemedPoints')
                     <div class="form-text text-danger">{{ $message }}</div>
                     @enderror
                 </div>

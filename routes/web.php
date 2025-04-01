@@ -28,6 +28,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/user', [UserController::class, 'edit'])->name('useer.edit');
+    Route::patch('/user', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/user', [UserController::class, 'destroy'])->name('user.destroy');
+});
+
 // User
 
 Route::resource('users', UserController::class)
