@@ -28,11 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/user', [UserController::class, 'edit'])->name('useer.edit');
-    Route::patch('/user', [UserController::class, 'update'])->name('user.update');
-    Route::delete('/user', [UserController::class, 'destroy'])->name('user.destroy');
-});
+//Route::middleware('auth')->group(function () {
+//    Route::get('/user', [UserController::class, 'edit'])->name('user.edit');
+//    Route::patch('/user', [UserController::class, 'update'])->name('user.update');
+//    Route::delete('/user', [UserController::class, 'destroy'])->name('user.destroy');
+//});
 
 // User
 
@@ -56,6 +56,7 @@ Route::resource('products', ProductController::class)->middleware(['auth', 'veri
 Route::resource('prizes', PrizeController::class)->middleware(['auth', 'verified']);
 Route::resource('receipts', ReceiptController::class)->middleware(['auth', 'verified']);
 Route::resource('countries', CountryController::class);
+Route::resource('processReceipts', PrizeController::class)->middleware(['auth', 'verified']);
 
 Route::resource('image', ImageController::class);
 

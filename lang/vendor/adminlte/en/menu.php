@@ -31,4 +31,6 @@ return [
     'products' => 'Products',
     'prizes' => 'Prizes',
     'receipts' => 'Receipts',
+    'complains' => 'Complains',
+    'process receipts' => 'Process Receipts'
 ];

@@ -210,4 +210,21 @@ class ReceiptController extends BaseController
         return redirect()->route('receipts.index')
             ->with('success','Receipt deleted successfully');
     }
+
+
+
+    /**
+     * Get all receipts from country
+     */
+    public function getAllByUser(Request $request)
+    {
+        $input = $request->all();
+
+        $receipt = Receipt::where('userId', $input['user_id'])->get();
+
+     //   return $this->sendResponse(new ReceiptResource($receipt), 'All receipt by user.');
+        return $this->sendResponse($receipt, 'All receipt by user.');
+    }
+
+
 }

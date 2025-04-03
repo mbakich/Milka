@@ -32,6 +32,9 @@ Route::middleware('auth:sanctum')->group( function () {
 
     Route::post('processReceipt', [ReceiptController::class,'processReceipt']);
 
+    Route::get('receipts/getAllByUser', [ReceiptController::class, 'getAllByUser']);
+
+
     Route::resource('prizes', PrizeController::class);
     Route::post('prizes/perCountry', [PrizeController::class, 'perCountry']);
     Route::post('prizes/getQualified', [PrizeController::class, 'getQualified']);

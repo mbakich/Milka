@@ -309,7 +309,17 @@ return [
             'icon' => 'fas fa-fw fa-signal',
         ],
         ['header' => 'administration'],
-
+        [
+            'text' => 'complains',
+            'icon' => 'fas fa-fw fa-question',
+            'submenu' => [
+                [
+                    'text' => 'process receipts',
+                    'url' => 'processReceipts',
+                    'icon' => 'fas fa-fw fa-cogs',
+                ],
+            ],
+        ],
         [
             'text' => 'settings',
             'icon' => 'fas fa-fw fa-cog',
@@ -317,7 +327,7 @@ return [
                 [
                     'text' => 'settings',
                     'url' => 'settings',
-                    'icon' => 'fas fa-fw fa-cog',
+                    'icon' => 'fas fa-fw fa-list',
                 ],
             ],
         ],

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('receipts', function (Blueprint $table) { //racuni
             $table->id();
             $table->foreignId('userId');
+            $table->string('number');
             $table->text('rawOcrData');
             $table->string('status');
             $table->dateTime('submissionDate');
