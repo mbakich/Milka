@@ -53,6 +53,12 @@
                         {{ $prize->maxPerUser }}
                     </div>
                 </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
+                    <div class="form-group">
+                        <strong>Country:</strong> <br/>
+                        {{ $prize->country_code }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

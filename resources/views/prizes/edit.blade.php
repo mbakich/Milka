@@ -24,7 +24,7 @@
                     <label for="inputName" class="form-label"><strong>Name:</strong></label>
                     <input
                         type="text"
-                        name="user_id"
+                        name="name"
                         value="{{ $prize->name }}"
                         class="form-control @error('name') is-invalid @enderror"
                         id="inputName"
@@ -100,6 +100,20 @@
                         id="inputMaxPerUser"
                         placeholder="Max Per User">
                     @error('maxPerUser')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDetail" class="form-label"><strong>Country:</strong></label>
+                    <input
+                        type="text"
+                        name="country_code"
+                        value="{{ $prize->country_code }}"
+                        class="form-control @error('country_code') is-invalid @enderror"
+                        id="inputCountryCode"
+                        placeholder="Country Code">
+                    @error('country_code')
                     <div class="form-text text-danger">{{ $message }}</div>
                     @enderror
                 </div>

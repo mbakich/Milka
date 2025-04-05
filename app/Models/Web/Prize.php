@@ -10,6 +10,6 @@ class Prize extends Model
    use HasFactory;
 
    protected $fillable = [
-       'name','description','imageUrl','pointsCost','totalStock','remainingStock','maxPerUser'
+       'name','description','imageUrl','pointsCost','totalStock','remainingStock','maxPerUser','country_code'
    ];
 }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('totalStock'); //broj slobodnih poklona
             $table->integer('remainingStock');
             $table->integer('maxPerUser');
-            $table->string('country')->nullable();
+            $table->string('country_code')->nullable();
             //   $table->boolean('status'); //true - ima jos, false - ne daje se vise
             $table->timestamps();
         });

@@ -4,22 +4,21 @@
 @section('plugins.Datatables', true)
 @section('plugins.DatatablesPlugin', true)
 
-@section('subtitle', 'Prizes')
+@section('subtitle', 'Receipts Process')
 @section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Prizes')
+@section('content_header_subtitle', 'Receipts Process')
 
 @section('content_body')
 
     @php
         $heads = [
             'ID',
-            'Name',
-            'Description',
-            'Points Cost',
-            'Total Stock',
-            'Remaining Stock',
-            'Max. per User',
-            'Country',
+            'User',
+            'OCR data',
+            'Status',
+            'Points Awarded',
+            'Submission Date',
+            'Processing Date',
             'Actions'
         ];
 
@@ -35,43 +34,42 @@
 
         $config = [
             'pagging' => true,
-            'data' => $prizes,
+            'data' => $receipts,
             'order' => [[1, 'asc']],
         //    'columns' => [null, null, null, ['orderable' => false]],
         ];
     @endphp
 
     <div class="card mt-5">
-        <h2 class="card-header">Prizes</h2>
+        <h2 class="card-header">Receipts</h2>
         <div class="card-body">
             @session('success')
             <div class="alert alert-success" role="alert"> {{ $value }} </div>
             @endsession
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a class="btn btn-success btn-sm" href="{{ route('prizes.create') }}"> <i class="fa fa-plus"></i> Create New Prize</a>
+                <a class="btn btn-success btn-sm" href="{{ route('receipts.create') }}"> <i class="fa fa-plus"></i> Create New Receipt</a>
             </div>
             <br>
 
             <x-adminlte-datatable id="table1" :heads="$heads">
 
-                @forelse ($prizes as $prize)
+                @forelse ($receipts as $receipt)
                     <tr>
-{{--                        <td>{{ ++$i }}</td>--}}
-                        <td>{{ $prize->id }}</td>
-                        <td>{{ $prize->name }}</td>
-                        <td>{{ $prize->description }}</td>
-                        <td>{{ $prize->pointsCost }}</td>
-                        <td>{{ $prize->totalStock }}</td>
-                        <td>{{ $prize->remainingStock }}</td>
-                        <td>{{ $prize->maxPerUser }}</td>
-                        <td>{{ $prize->country_code }}</td>
+                        {{--                        <td>{{ ++$i }}</td>--}}
+                        <td>{{ $receipt->id }}</td>
+                        <td>{{ \App\Models\User::find($receipt->userId)->name }}</td>
+                        <td>{{ $receipt->rawOcrData }}</td>
+                        <td>{{ $receipt->status }}</td>
+                        <td>{{ $receipt->pointsAwarded }}</td>
+                        <td>{{ fromISODateTime($receipt->submissionDate)}}</td>
+                        <td>{{ fromISODateTime($receipt->processingDate) }}</td>
                         <td>
-                            <form action="{{ route('prizes.destroy',$prize->id) }}" method="POST">
+                            <form action="{{ route('receipts.destroy',$receipt->id) }}" method="POST">
 
-                                <a class="btn btn-xs btn-default text-teal mx-1 shadow" href="{{ route('prizes.show',$prize->id) }}"><i class="fa fa-lg fa-fw fa-eye"></i></a>
+                                <a class="btn btn-xs btn-default text-teal mx-1 shadow" href="{{ route('receipts.show',$receipt->id) }}"><i class="fa fa-lg fa-fw fa-eye"></i></a>
 
-                                <a class="btn btn-xs btn-default text-primary mx-1 shadow" href="{{ route('prizes.edit',$prize->id) }}"><i class="fa fa-lg fa-fw fa-pen"></i></a>
+                                <a class="btn btn-xs btn-default text-primary mx-1 shadow" href="{{ route('receipts.edit',$receipt->id) }}"><i class="fa fa-lg fa-fw fa-pen"></i></a>
 
                                 @csrf
                                 @method('DELETE')
@@ -88,10 +86,6 @@
             </x-adminlte-datatable>
         </div>
     </div>
-
- Setup data for datatables
-
-
 @stop
 
 {{-- Push extra CSS --}}
@@ -106,3 +100,4 @@
 @push('js')
     <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
 @endpush
+

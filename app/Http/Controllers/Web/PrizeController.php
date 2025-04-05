@@ -9,8 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
-use App\Http\Requests\Prizes\ReceiptStoreRequest;
-use App\Http\Requests\Prizes\ReceiptUpdateRequest;
+use App\Http\Requests\Prizes\PrizeStoreRequest;
+use App\Http\Requests\Prizes\PrizeUpdateRequest;
 
 class PrizeController extends Controller
 {
@@ -19,13 +19,13 @@ class PrizeController extends Controller
      */
     public function index()
     {
-        $prizes = Prize::latest()->paginate(10);
-
-        return view('prizes.index', compact('prizes'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
-//        $prizes = Prize::all();
+//        $prizes = Prize::latest()->paginate(10);
 //
-//        return view('prizes.index', compact('prizes'));
+//        return view('prizes.index', compact('prizes'))
+//            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $prizes = Prize::all();
+
+        return view('prizes.index', compact('prizes'));
     }
 
     /**
@@ -39,7 +39,7 @@ class PrizeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ReceiptStoreRequest $request)
+    public function store(PrizeStoreRequest $request)
     {
         Prize::create($request->validated());
 
@@ -66,7 +66,7 @@ class PrizeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ReceiptUpdateRequest $request, Prize $prize)
+    public function update(PrizeUpdateRequest $request, Prize $prize)
     {
         $prize->update($request->validated());
 

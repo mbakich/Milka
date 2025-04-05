@@ -56,7 +56,8 @@ Route::resource('products', ProductController::class)->middleware(['auth', 'veri
 Route::resource('prizes', PrizeController::class)->middleware(['auth', 'verified']);
 Route::resource('receipts', ReceiptController::class)->middleware(['auth', 'verified']);
 Route::resource('countries', CountryController::class);
-Route::resource('processReceipts', PrizeController::class)->middleware(['auth', 'verified']);
+
+Route::get('process', [ReceiptController::class, 'process'])->middleware(['auth', 'verified']);
 
 Route::resource('image', ImageController::class);
 

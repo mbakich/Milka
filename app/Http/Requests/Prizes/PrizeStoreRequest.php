@@ -24,11 +24,11 @@ class PrizeStoreRequest extends FormRequest
         return [
             'name'=>'required',
             'description'=>'required',
-            'imageUrl'=>'required',
             'pointsCost'=>'required',
             'totalStock'=>'required',
             'remainingStock'=>'required',
-            'maxPerUser'=>'required'
+            'maxPerUser'=>'required',
+            'country_code'=>'required'
         ];
     }
 }

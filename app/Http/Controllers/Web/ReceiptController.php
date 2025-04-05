@@ -82,4 +82,14 @@ class ReceiptController extends Controller
         return redirect()->route('receipts.index')
             ->with('success','Receipt deleted successfully');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function process(Receipt $receipt)
+    {
+        $receipts = Receipt::all();
+
+        return view('receipts.process', compact('receipts'));
+    }
 }

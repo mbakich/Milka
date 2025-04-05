@@ -315,7 +315,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'process receipts',
-                    'url' => 'processReceipts',
+                    'url' => 'process',
                     'icon' => 'fas fa-fw fa-cogs',
                 ],
             ],
