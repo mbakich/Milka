@@ -5,11 +5,11 @@ namespace App\Models\Web;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class Gramaza extends Model
 {
-   use HasFactory;
+    use HasFactory;
 
-   protected $fillable = [
-       'id','name','code'
-   ];
+    protected $fillable = [
+        'id', 'category','grams'
+    ];
 }

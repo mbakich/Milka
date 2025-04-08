@@ -35,7 +35,7 @@ class PrizeController extends BaseController
     {
         $input = $request->all();
 
-        $prizes = Prize::where('country',$input['country'])->get();
+        $prizes = Prize::where('country_code',$input['country_code'])->get();
 
         return $this->sendResponse(PrizeResource::collection($prizes), 'Prizes retrieved successfully.');
     }
@@ -51,10 +51,10 @@ class PrizeController extends BaseController
 
         $user = User::find($input['user_id']);
         $userPrizes = UserPrizes::select(DB::raw('count(prizeId) as num_prizes, prizeId'))
-                ->where('userId',$input['user_id'])
+                ->where('user_id',$input['user_id'])
                 ->groupBy('prizeId')->get();
 
-        $prizes = Prize::where('country',$user->country)
+        $prizes = Prize::where('country_code',$user->country_code)
             ->where('pointsCost','<=',$user->currentPoints)->get();
 
         $locPrizes = array();
@@ -88,7 +88,7 @@ class PrizeController extends BaseController
     {
         $input = $request->all();
 
-        RedeemPrizeJob::dispatch($input['userId'], $input['prize_id']);
+        RedeemPrizeJob::dispatch($input['user_id'], $input['prize_id']);
 
         return $this->sendResponse(true, 'Prizes retrieved successfully.');
     }

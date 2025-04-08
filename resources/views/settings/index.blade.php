@@ -4,13 +4,13 @@
 @section('plugins.Datatables', true)
 @section('plugins.DatatablesPlugin', true)
 
-@section('subtitle', 'Users')
+@section('subtitle', 'Settings')
 @section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Users')
+@section('content_header_subtitle', 'Setttings')
 
 @section('content_body')
 
-    <p>Settngs</p>
+    <p>Settings</p>
 
 @stop
 

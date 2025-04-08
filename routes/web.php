@@ -46,6 +46,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('settings', [SettingsController::class, 'index'])->name('settings');
+Route::get('data', [App\Http\Controllers\Web\DataController::class, 'index'])->name('data');
+Route::get('data/installCategories', [App\Http\Controllers\Web\DataController::class, 'installCategories'])->name('installCategories');
 
 Route::resource('products', ProductController::class)->middleware(['auth', 'verified']);
 //Route::get('products', [ProductController::class, 'index'])->name('products.index')->middleware(['auth', 'verified']);
@@ -56,8 +58,10 @@ Route::resource('products', ProductController::class)->middleware(['auth', 'veri
 Route::resource('prizes', PrizeController::class)->middleware(['auth', 'verified']);
 Route::resource('receipts', ReceiptController::class)->middleware(['auth', 'verified']);
 Route::resource('countries', CountryController::class);
+Route::resource('editComplains', ReceiptController::class)->middleware(['auth', 'verified']);
 
 Route::get('process', [ReceiptController::class, 'process'])->middleware(['auth', 'verified']);
+Route::get('editComplains', [ReceiptController::class, 'editComplains'])->middleware(['auth', 'verified']);
 
 Route::resource('image', ImageController::class);
 

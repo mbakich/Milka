@@ -325,9 +325,14 @@ return [
             'icon' => 'fas fa-fw fa-cog',
             'submenu' => [
                 [
-                    'text' => 'settings',
+                    'text' => 'edit settings',
                     'url' => 'settings',
                     'icon' => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text' => 'install default data',
+                    'url' => 'data',
+                    'icon' => 'fas fa-fw fa-database',
                 ],
             ],
         ],

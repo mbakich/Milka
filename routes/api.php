@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +10,7 @@ use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\PrizeController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\Media\ImageController;
+use App\Http\Controllers\API\DataAPIController;
 
 Route::controller(RegisterController::class)->group(function(){
     Route::post('register', 'register');
@@ -47,6 +47,11 @@ Route::middleware('auth:sanctum')->group( function () {
 //    });
 
 });
+
+// Install data
+Route::get('installCategories', [DataAPIController::class, 'installCategories']);
+Route::get('installCountries', [DataAPIController::class, 'installCountries']);
+Route::get('installGramaza', [DataAPIController::class, 'installGramaza']);
 
 // Notifikacije
 

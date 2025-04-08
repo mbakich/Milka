@@ -92,4 +92,24 @@ class ReceiptController extends Controller
 
         return view('receipts.process', compact('receipts'));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function editComplains(Receipt $receipt)
+    {
+        $receipts = Receipt::all();
+
+        return view('receipts.edit_complains', compact('receipts'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function updateComplains(Receipt $receipt)
+    {
+        $receipts = Receipt::all();
+
+        return view('receipts.edit_complains', compact('receipts'));
+    }
 }

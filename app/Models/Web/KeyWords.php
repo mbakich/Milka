@@ -5,11 +5,11 @@ namespace App\Models\Web;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class KeyWords extends Model
 {
-   use HasFactory;
+    use HasFactory;
 
-   protected $fillable = [
-       'id','name','code'
-   ];
+    protected $fillable = [
+        'sinonim'
+    ];
 }

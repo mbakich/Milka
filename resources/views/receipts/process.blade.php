@@ -41,16 +41,11 @@
     @endphp
 
     <div class="card mt-5">
-        <h2 class="card-header">Receipts</h2>
+        <h2 class="card-header">Complains</h2>
         <div class="card-body">
             @session('success')
             <div class="alert alert-success" role="alert"> {{ $value }} </div>
             @endsession
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a class="btn btn-success btn-sm" href="{{ route('receipts.create') }}"> <i class="fa fa-plus"></i> Create New Receipt</a>
-            </div>
-            <br>
 
             <x-adminlte-datatable id="table1" :heads="$heads">
 
@@ -69,7 +64,7 @@
 
                                 <a class="btn btn-xs btn-default text-teal mx-1 shadow" href="{{ route('receipts.show',$receipt->id) }}"><i class="fa fa-lg fa-fw fa-eye"></i></a>
 
-                                <a class="btn btn-xs btn-default text-primary mx-1 shadow" href="{{ route('receipts.edit',$receipt->id) }}"><i class="fa fa-lg fa-fw fa-pen"></i></a>
+                                <a class="btn btn-xs btn-default text-primary mx-1 shadow" href="{{ route('receipts.editComplains',$receipt->id) }}"><i class="fa fa-lg fa-fw fa-pen"></i></a>
 
                                 @csrf
                                 @method('DELETE')

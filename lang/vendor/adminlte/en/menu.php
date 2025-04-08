@@ -32,5 +32,6 @@ return [
     'prizes' => 'Prizes',
     'receipts' => 'Receipts',
     'complains' => 'Complains',
-    'process receipts' => 'Process Receipts'
+    'process receipts' => 'Process Receipts',
+    'install default data' => 'Install Default Data',
 ];

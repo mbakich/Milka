@@ -70,6 +70,14 @@ if (! function_exists ( 'fromISODateTime' )) {
         return date_format($date,"d.m.Y H.i");
     }
 }
+
+if (! function_exists ( 'toISODateTime' )) {
+    function toISODateTime($inDate) {
+        $date=date_create($inDate);
+
+        return date_format($date,"Y-m-d H.i.s");
+    }
+}
 /**
  * Write code on Method
  *

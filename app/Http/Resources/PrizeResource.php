@@ -22,7 +22,7 @@ class PrizeResource extends JsonResource
             'totalStock' => $this->totalStock,
             'remainingStock' => $this->remainingStock,
             'maxPerUser' => $this->maxPerUser,
-            'country' => $this->country,
+            'country_code' => $this->country_code,
             'created_at' => $this->created_at->format('Y-m-d'),
             'updated_at' => $this->updated_at->format('Y-m-d'),
         ];
