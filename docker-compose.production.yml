@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  app-api:
+    image: localhost:5000/${CI_PROJECT_NAME}/laravel-api
+    build:
+      dockerfile: ./docker/dockerfiles/laravel-api/Dockerfile
+      args:
+        - ENV_FILE=.env.production
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 20s
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 120s
+        
+  load-balancer:
+    image: localhost:5000/${CI_PROJECT_NAME}/load-balancer
+    ports:
+      - target: 80
+        published: ${LOAD_BALANCER_PORT_HTTP-8080}
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: ${LOAD_BALANCER_PORT_HTTPS-8443}
+        protocol: tcp
+        mode: host

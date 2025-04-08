@@ -1,0 +1,83 @@
+version: "3.7"
+services:
+  app-api:
+    image: ${CI_PROJECT_NAME-my_project}/laravel-api
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./docker/dockerfiles/laravel-api/Dockerfile
+      args:
+        - ENV_FILE=.env.example
+    env_file: ${ENV_FILE-.env}
+    environment:
+      - GITHUB_COMPOSER_OAUTH_TOKEN
+    networks:
+      - backend
+      - web
+    ulimits:
+      nofile:
+        soft: 20000
+        hard: 40000
+  app-queue:
+    image: ${CI_PROJECT_NAME-my_project}/laravel-queue-worker
+    restart: unless-stopped
+    stop_grace_period: 1m
+    build:
+      context: .
+      dockerfile: ./docker/dockerfiles/laravel-queue-worker/Dockerfile
+      args:
+        - ENV_FILE=.env.example
+    env_file: ${ENV_FILE-.env}
+    environment:
+      - GITHUB_COMPOSER_OAUTH_TOKEN
+    networks:
+      - backend
+    ulimits:
+      nofile:
+        soft: 20000
+        hard: 40000
+  load-balancer:
+    image: ${CI_PROJECT_NAME-my_project}/load-balancer
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./docker/dockerfiles/haproxy/Dockerfile
+      args:
+        - CERT_CHAIN
+        - CERT_KEY
+        - HAPROXY_NO_HTTPS
+    env_file: ${ENV_FILE-.env}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - haproxy_certs:/var/ssl-certs/
+    networks:
+      - web
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.role == manager]
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 1s
+  db:
+    image: mysql
+    volumes:
+      - mysql-volume:/var/lib/mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+      MYSQL_USER: $DB_USERNAME
+      MYSQL_PASSWORD: $DB_PASSWORD
+      MYSQL_DATABASE: $DB_DATABASE
+    networks:
+      - backend
+
+networks:
+  backend:
+  web:
+
+volumes:
+  haproxy_certs:
+    driver: "local"
+  mysql-volume:

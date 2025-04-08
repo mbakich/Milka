@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+  app-api:
+    image: localhost:5000/${CI_PROJECT_NAME}/laravel-api
+    build:
+      args:
+        - ENV_FILE=.env.staging
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 1s
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 10s
+
+  load-balancer:
+    image: localhost:5000/${CI_PROJECT_NAME}/load-balancer
+    ports:
+      - target: 80
+        published: ${LOAD_BALANCER_PORT_HTTP}
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: ${LOAD_BALANCER_PORT_HTTPS}
+        protocol: tcp
+        mode: host
+  phpmyadmin:
+    image: phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+    networks:
+    - backend  
