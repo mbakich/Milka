@@ -307,11 +307,13 @@ return [
             'text' => 'dashboard',
             'url' => 'dashboard',
             'icon' => 'fas fa-fw fa-signal',
+        //    'can' => ['role_id', '=','1']
         ],
         ['header' => 'administration'],
         [
             'text' => 'complains',
             'icon' => 'fas fa-fw fa-question',
+        //    'can' => ['role_id < 3'],
             'submenu' => [
                 [
                     'text' => 'process receipts',
@@ -323,6 +325,7 @@ return [
         [
             'text' => 'settings',
             'icon' => 'fas fa-fw fa-cog',
+         //   'can' => 'role_id = 1',
             'submenu' => [
                 [
                     'text' => 'edit settings',

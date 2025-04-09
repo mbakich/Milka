@@ -30,9 +30,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $role = Auth::user()->role_id;
 
-        if($role < 3) {
+        if(Auth::user()->role_id < 3) {
             return view('dashboard.index');
         }else{
             Auth::guard('web')->logout();

@@ -17,6 +17,7 @@
             'ID',
             'Full Name',
             'Email',
+            'Role',
             'City',
             'Address',
             'Phone',
@@ -64,6 +65,7 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->fullName }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ (new App\Models\Web\Role)::find($user->role_id)->display_name }}</td>
                             <td>{{ $user->city }}</td>
                             <td>{{ $user->address }}</td>
                             <td>{{ $user->phoneNumber }}</td>

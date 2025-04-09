@@ -63,7 +63,7 @@ class UserController extends Controller
     {
      //   $user->update($request->validated());
 
-        $user->update( $request->only(['city', 'address','phoneNumber','idNumber',
+        $user->update( $request->only(['role_id', 'city', 'address','phoneNumber','idNumber',
             'country',
             'currentPoints',
             'redeemedPoints']) );

@@ -24,6 +24,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'name'=>'required',
             'email'=>'required',
+            'role_id',
             'city',
             'address',
             'phoneNumber',

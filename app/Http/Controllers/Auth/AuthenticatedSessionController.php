@@ -25,12 +25,16 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        print_a('here');die();
-//        $request->authenticate();
-//
-//        $request->session()->regenerate();
 
-     //   return redirect()->intended(route('dashboard', absolute: false));
+        if(Auth::user()->role_id > 2){
+            $this->destroy($request);
+        }
+
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**

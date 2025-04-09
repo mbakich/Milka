@@ -50,16 +50,25 @@
 
                 <div class="mb-3">
                     <label for="inputName" class="form-label"><strong>Role:</strong></label>
-                    <input
-                        type="text"
-                        name="name"
-                        value="{{ $user->role_id }}"
-                        class="form-control @error('role_id') is-invalid @enderror"
-                        id="inputRoleId"
-                        placeholder="Role Id">
-                    @error('role_id')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                    @enderror
+                    <select name="role_id">
+                        @foreach((new App\Models\Web\Role)::all() as $role)
+                            @if($user->role_id === $role->id)
+                                <option value="{{$role->id}}" selected>{{$role->display_name}}</option>
+                            @else
+                                <option value="{{$role->id}}">{{$role->display_name}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+{{--                    <input--}}
+{{--                        type="text"--}}
+{{--                        name="role_id"--}}
+{{--                        value="{{ $user->role_id }}"--}}
+{{--                        class="form-control @error('role_id') is-invalid @enderror"--}}
+{{--                        id="inputRoleId"--}}
+{{--                        placeholder="Role Id">--}}
+{{--                    @error('role_id')--}}
+{{--                    <div class="form-text text-danger">{{ $message }}</div>--}}
+{{--                    @enderror--}}
                 </div>
 
                 <div class="mb-3">

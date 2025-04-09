@@ -64,11 +64,12 @@ Route::resource('countries', CountryController::class);
 Route::resource('editComplains', ReceiptController::class)->middleware(['auth', 'verified']);
 
 Route::get('process', [ReceiptController::class, 'process'])->middleware(['auth', 'verified']);
-Route::get('editComplains', [ReceiptController::class, 'editComplains'])->middleware(['auth', 'verified']);
+Route::get('edit_complains', [ReceiptController::class, 'editComplains'])->middleware(['auth', 'verified']);
 
 Route::resource('image', ImageController::class);
 
 // Media
+
 
 Route::get('add-media-to-library', function () {
     Image::create()

@@ -16,7 +16,7 @@ class RoleSeeder extends Seeder
         $now = date('Y-m-d H:i:s');
 
         $sql = "
-            INSERT INTO `role` (`id`, `name`, `display_name`, `description`) VALUES
+            INSERT INTO `roles` (`id`, `name`, `display_name`, `description`) VALUES
             (1, 'admin', 'Administrator', 'Administrator'),
             (2, 'marketing', 'Marketing', 'Marketiing'),
             (3, 'client', 'Client', 'Client');
