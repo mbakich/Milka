@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Web\Country;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class CountrySeeder extends Seeder
 {
@@ -13,23 +14,17 @@ class CountrySeeder extends Seeder
      */
     public function run(): void
     {
-        Country::factory()->create(
-            [
-                'name' => 'Srbija',
-                'country_code' => 'SRB',
-            ],
-            [
-                'name' => 'Hrvatska',
-                'country_code' => 'CRO',
-            ],
-            [
-                'name' => 'Bosna i Hercegovina',
-                'country_code' => 'BIH',
-            ],
-            [
-                'name' => 'Slovenijja',
-                'country_code' => 'SLO',
-            ]
-        );
+        $now = date('Y-m-d H:i:s');
+
+        $sql = "
+           INSERT INTO `countries` (`id`, `name`, `country_code`, `created_at`, `updated_at`) VALUES
+                (1, 'Srbija', 'SRB', '{$now}', '{$now}'),
+                (2, 'Hrvatska', 'CRO', '{$now}', '{$now}'),
+                (3, 'Slovenija', 'SLO', '{$now}', '{$now}'),
+                (4, 'Bosna i Hercegovina', 'BIH', '{$now}', '{$now}');
+            COMMIT;
+        ";
+
+        DB::unprepared($sql);
     }
 }

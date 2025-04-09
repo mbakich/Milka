@@ -14,10 +14,12 @@ use App\Http\Controllers\Web\Users\UserController;
 use App\Models\Web\Image;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome_adminlte');
-})->middleware(['auth', 'verified']);
+//Route::get('/', function () {
+//    return view('welcome_adminlte');
+//})->middleware(['auth', 'verified']);
 
+//Route::get('/', DashboardController::class)->middleware(['auth', 'verified']);
+//
 //Route::get('dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
@@ -43,11 +45,12 @@ require __DIR__.'/auth.php';
 
 Auth::routes();
 
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('settings', [SettingsController::class, 'index'])->name('settings');
 Route::get('data', [App\Http\Controllers\Web\DataController::class, 'index'])->name('data');
-Route::get('data/installCategories', [App\Http\Controllers\Web\DataController::class, 'installCategories'])->name('installCategories');
+// Route::get('data/installCategories', [App\Http\Controllers\Web\DataController::class, 'installCategories'])->name('installCategories');
 
 Route::resource('products', ProductController::class)->middleware(['auth', 'verified']);
 //Route::get('products', [ProductController::class, 'index'])->name('products.index')->middleware(['auth', 'verified']);

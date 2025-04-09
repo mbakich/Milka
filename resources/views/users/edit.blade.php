@@ -49,6 +49,20 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="inputName" class="form-label"><strong>Role:</strong></label>
+                    <input
+                        type="text"
+                        name="name"
+                        value="{{ $user->role_id }}"
+                        class="form-control @error('role_id') is-invalid @enderror"
+                        id="inputRoleId"
+                        placeholder="Role Id">
+                    @error('role_id')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="inputDetail" class="form-label"><strong>City:</strong></label>
                     <input
                         type="text"

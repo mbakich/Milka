@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -29,7 +30,19 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        $role = Auth::user()->role_id;
+
+        if($role < 3) {
+            return view('dashboard.index');
+        }else{
+            Auth::guard('web')->logout();
+
+//            $request->session()->invalidate();
+//
+//            $request->session()->regenerateToken();
+
+            return redirect('/');
+        }
     }
 
     public function showChart()

@@ -66,7 +66,8 @@ class User extends Authenticatable
         'idNumber',
         'country',
         'currentPoints',
-        'redeemedPoints'
+        'redeemedPoints',
+        'role_id'
     ];
 
     /**

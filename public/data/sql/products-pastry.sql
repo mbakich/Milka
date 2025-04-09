@@ -1,8 +1,0 @@
-INSERT INTO products (skuCode, skuName, category, pointsValue, country, created_at, updated_at) VALUES ('4316826', 'Milka Croissant Choco 50g', 'Pastry', '1', 'SRB', '2025-04-07 21:42:35', '2025-04-07 21:42:35');
-INSERT INTO products (skuCode, skuName, category, pointsValue, country, created_at, updated_at) VALUES ('4316829', 'Milka Croissant Vanilla 50g', 'Pastry', '1', 'SRB', '2025-04-07 21:42:35', '2025-04-07 21:42:35');
-INSERT INTO products (skuCode, skuName, category, pointsValue, country, created_at, updated_at) VALUES ('4316826', 'Milka Croissant Choco 50g', 'Pastry', '1', 'CRO', '2025-04-07 21:42:35', '2025-04-07 21:42:35');
-INSERT INTO products (skuCode, skuName, category, pointsValue, country, created_at, updated_at) VALUES ('4316829', 'Milka Croissant Vanilla 50g', 'Pastry', '1', 'CRO', '2025-04-07 21:42:35', '2025-04-07 21:42:35');
-INSERT INTO products (skuCode, skuName, category, pointsValue, country, created_at, updated_at) VALUES ('4316826', 'Milka Croissant Choco 50g', 'Pastry', '1', 'SLO', '2025-04-07 21:42:35', '2025-04-07 21:42:35');
-INSERT INTO products (skuCode, skuName, category, pointsValue, country, created_at, updated_at) VALUES ('4316829', 'Milka Croissant Vanilla 50g', 'Pastry', '1', 'SLO', '2025-04-07 21:42:35', '2025-04-07 21:42:35');
-INSERT INTO products (skuCode, skuName, category, pointsValue, country, created_at, updated_at) VALUES ('4316826', 'Milka Croissant Choco 50g', 'Pastry', '1', 'BIH', '2025-04-07 21:42:35', '2025-04-07 21:42:35');
-INSERT INTO products (skuCode, skuName, category, pointsValue, country, created_at, updated_at) VALUES ('4316829', 'Milka Croissant Vanilla 50g', 'Pastry', '1', 'BIH', '2025-04-07 21:42:35', '2025-04-07 21:42:35');
