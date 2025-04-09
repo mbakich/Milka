@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'password' => '!AdminMilka711!',
          //   'avatar' => null,
          //   'country_id' => null,
-            'role_id' => $admin->id,
+            'role_id' => 1, //$admin->id,
          //   'status' => UserStatus::ACTIVE,
             'email_verified_at' => now(),
         ]);
