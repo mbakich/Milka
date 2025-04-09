@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  app-api:
+    volumes: 
+      - ./:/var/www/html
+  load-balancer:
+    ports:
+      - target: 80
+        published: 8080
+        protocol: tcp
+        mode: host
+  phpmyadmin:
+    image: phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 8081:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=$DB_USERNAME
+      - PMA_PASSWORD=$DB_PASSWORD
+    networks:
+    - backend  
