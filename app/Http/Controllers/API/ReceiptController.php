@@ -36,7 +36,11 @@ class ReceiptController extends BaseController
 
         $receipt_id = $this->initStore($request);
 
-        ProcessReceiptJob::dispatch($input['userId'], $receipt_id);
+        $receipt = Receipt::find($receipt_id);
+
+        $filePath = $receipt->getFirstMediaUrl('default');
+
+        ProcessReceiptJob::dispatch($input['userId'], $receipt_id, $filePath);
 
         return $this->sendResponse(true, 'Receipts retrieved successfully.');
     }
@@ -126,7 +130,7 @@ class ReceiptController extends BaseController
     public function update_ocr(Request $request) //int $receiptId, string $ocrJson)
     {
         $input = $request->all();
-//dd($input['receiptId']);
+
         $receipt = Receipt::find($input['receiptId']);
 
         $receipt->rawOcrData = $input['ocrResult'];

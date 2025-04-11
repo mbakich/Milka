@@ -4,6 +4,8 @@ namespace App\Jobs;
 
 use App\Http\Controllers\API\ReceiptController;
 use App\Http\Controllers\API\UserController;
+use App\Models\Web\Gramaza;
+use App\Models\Web\Categories;
 use App\Models\Web\Product;
 use App\Models\Web\Receipt;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -12,6 +14,7 @@ use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
 
 class ProcessOcrJob implements ShouldQueue
 {
@@ -37,19 +40,36 @@ class ProcessOcrJob implements ShouldQueue
     public function handle()
     {
         $sumPoints = 0;
-        $products = Product::all();
+    //    $gramaza = Gramaza::all();
+        $gramaza = DB::select('SELECT * FROM gramaza');
 
      //   var_dump($this->raw_ocr);
         $tempArray = json_decode($this->raw_ocr);
-        $items = $tempArray->receipt->items;
+        $items = $tempArray->document->entities;
         foreach($items as $item){
-            foreach($products as $product){
-                $compare = compareTwoStrings($product->skuName,$item->name);
-             //   var_dump('Compare:' .$product->skuName.' - '.$item->name .' -> result:'. $compare);
-                if($compare > 0.56){
-                    $sumPoints += $product->pointsValue;
-                 //   var_dump($product->skuName.' - '.$item->name);
-                    break;
+            if(strpos(strtoupper($item->mentionText),'MILKA') !== false){
+                $ii = 0;
+                $kol = 0;
+                $fp = fopen("php://memory", 'r+');
+                fputs($fp, $item->mentionText);
+                rewind($fp);
+                while($line = fgets($fp)){
+                    // deal with $line
+                    if(ctype_digit(trim($line))){
+                        $kol = (int)trim($line);
+                        break;
+                    }
+                }
+                fclose($fp);
+
+                $locArray = explode('\\n', $item->mentionText);
+                foreach($gramaza as $gram){
+                    if(strpos($locArray[0], $gram->grams) !== false){
+                        $kategorija = DB::select("SELECT * FROM categories WHERE naziv ='{$gram->category}'");
+                        $points = (int)$kategorija[0]->points; //Categories::find($gram->category)->points;
+                        $sumPoints += $points * $kol;
+                        break;
+                    }
                 }
             }
         }
@@ -61,7 +81,7 @@ class ProcessOcrJob implements ShouldQueue
                 'sumPoints' => $sumPoints,
             ]);
             (new ReceiptController())->update_points($request);
-//print_a('pre user');
+
             $request = new Request([
                 'userId'   => $this->userId,
                 'sumPoints' => $sumPoints,
